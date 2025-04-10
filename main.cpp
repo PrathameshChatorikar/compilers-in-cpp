@@ -1,14 +1,13 @@
-#include <iostream>
-#include "lexer.hpp"
+#include "parser.hpp"
+#include "ast.hpp"
 
 int main() {
     std::string code = "int x = 42 + y;";
     Lexer lexer(code);
-    Token token;
+    Parser parser(lexer);
 
-    while ((token = lexer.nextToken()).type != TokenType::EndOfFile) {
-        std::cout << "Token: " << token.value << std::endl;
-    }
+    auto ast = parser.parse();
 
+    std::cout << "AST successfully built.\n";
     return 0;
 }
